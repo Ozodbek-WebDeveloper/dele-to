@@ -172,6 +172,8 @@ function getExpirationTime(timeString: string): Date {
       return new Date(now.getTime() + 60 * 60 * 1000)
     case "24h":
       return new Date(now.getTime() + 24 * 60 * 60 * 1000)
+    case "3d": 
+      return new Date(now.getTime() + 3 * 24 * 60 * 60 * 1000)
     case "7d":
       return new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000)
     default:
@@ -383,7 +385,7 @@ export async function createSecureShare(data: {
       return { success: false, error: "Missing encrypted content or IV" }
     }
 
-    if (data.maxViews < 1 || data.maxViews > 100) {
+    if (data.maxViews < 1 || data.maxViews > 1000000) {
       logError("❌ Invalid max views count:", data.maxViews)
       return { success: false, error: "Invalid max views count" }
     }

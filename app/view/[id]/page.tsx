@@ -234,7 +234,7 @@ export default function ViewPage({ params }: { params: { id: string } }) {
                 <div className="flex items-center gap-2">
                   <Eye className="w-4 h-4 text-blue-500" />
                   <span className="text-blue-600 dark:text-blue-400 font-medium">
-                    {share.currentViews}/{share.maxViews} views
+                    {share.currentViews}/{(share.maxViews === 0 || share.maxViews > 100) ? 'Unlimited' : share.maxViews} views
                   </span>
                 </div>
               </div>
@@ -269,7 +269,7 @@ export default function ViewPage({ params }: { params: { id: string } }) {
               </Alert>
 
               <div className="text-center">
-                <Link href="/create">
+                <Link href="/">
                   <Button>Create Your Own Secure Share</Button>
                 </Link>
               </div>
@@ -312,7 +312,7 @@ export default function ViewPage({ params }: { params: { id: string } }) {
                   <div className="flex items-center gap-2">
                     <Eye className="w-4 h-4 text-blue-500" />
                     <span className="text-blue-600 dark:text-blue-400 font-medium">
-                      {metadata.currentViews}/{metadata.maxViews} views
+                      {metadata.currentViews}/{(metadata.maxViews === 0 || metadata.maxViews > 100) ? 'Unlimited' : metadata.maxViews} views
                     </span>
                   </div>
                 </div>
