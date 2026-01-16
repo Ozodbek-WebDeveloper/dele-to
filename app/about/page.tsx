@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Lock, Eye, Server, Key, ArrowLeft, Shield } from "lucide-react"
 import Link from "next/link"
-
+// test bir ikki
 export default function AboutPage() {
   return (
     <div className="min-h-screen">
