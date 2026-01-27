@@ -220,9 +220,19 @@ export default function ViewPage({ params }: { params: { id: string } }) {
           <Card>
             <CardHeader>
               <div className="flex justify-center mb-4">
-                <div className="p-3 bg-green-100 rounded-full">
-                  <img src={share.imgUrl || "/default-image.png"} alt="Share Image" />
-                </div>
+                {share.imgUrl ? (
+                  <div className="relative">
+                    <img 
+                      src={share.imgUrl} 
+                      alt="Share Image" 
+                      className="w-32 h-32 rounded-full object-cover shadow-lg border-4 border-green-100"
+                    />
+                  </div>
+                ) : (
+                  <div className="p-3 bg-green-100 rounded-full">
+                    <Shield className="w-8 h-8 text-green-600" />
+                  </div>
+                )}
               </div>
               <CardTitle className="text-center">{share.title || "Secure Content"}</CardTitle>
               <CardDescription className="text-center">
@@ -290,9 +300,19 @@ export default function ViewPage({ params }: { params: { id: string } }) {
         <Card>
           <CardHeader className="text-center">
             <div className="flex justify-center mb-4">
-              <div className="p-3 bg-blue-100 rounded-full">
-                 <img src={metadata?.imgUrl || "/default-image.png"} alt="Share Image" />
-              </div>
+              {metadata?.imgUrl ? (
+                <div className="relative">
+                  <img 
+                    src={metadata.imgUrl} 
+                    alt="Share Image" 
+                    className="w-32 h-32 rounded-lg object-cover shadow-lg border-4 border-blue-100"
+                  />
+                </div>
+              ) : (
+                <div className="p-3 bg-blue-100 rounded-full">
+                  <Shield className="w-8 h-8 text-blue-600" />
+                </div>
+              )}
             </div>
             <CardTitle>Access Secure Content</CardTitle>
             <CardDescription>

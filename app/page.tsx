@@ -309,9 +309,19 @@ export default function CreatePage() {
           <Card>
             <CardHeader className="text-center">
               <div className="flex justify-center mb-4">
-                <div className="p-3 bg-green-100 rounded-full">
-                  <Shield className="w-8 h-8 text-green-600" />
-                </div>
+                {localImagesPreview ? (
+                  <div className="relative">
+                    <img 
+                      src={localImagesPreview} 
+                      alt="Share Image" 
+                      className="w-32 h-32 rounded-full object-cover shadow-lg border-4 border-green-100"
+                    />
+                  </div>
+                ) : (
+                  <div className="p-3 bg-green-100 rounded-full">
+                    <Shield className="w-8 h-8 text-green-600" />
+                  </div>
+                )}
               </div>
               <CardTitle className="text-2xl">
                 {formData.multiRecipient ? `${generatedLinks.length} Secure Links Created!` : 'Secure Link Created!'}
@@ -402,7 +412,7 @@ export default function CreatePage() {
               </Alert>
 
               <Alert>
-                 <img src={localImagesPreview || "/default-image.png"} alt="Share Image" />
+                <Shield className="w-4 h-4" />
                 <AlertDescription>
                   <strong>Important:</strong> Each link will expire based on its individual settings. Your data is encrypted with
                   AES-256 and can only be decrypted by someone with the complete link.
