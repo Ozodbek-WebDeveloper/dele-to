@@ -503,13 +503,14 @@ export default function CreatePage() {
                   placeholder="e.g., Database Password, API Key"
                   value={formData.title}
                   onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+                  required
                 />
               </div>
              
               <div className="space-y-3 p-4 border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
                 <Label htmlFor="content" className="text-base font-medium">Secret Content *</Label>
                 {!localImagesPreview ? (
-                  <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-6 text-center cursor-pointer hover:border-gray-400 transition">
+                  <div className="border-2 w-40 h-[40%] mx-auto border-dashed border-gray-300 dark:border-gray-600 rounded-full p-6 text-center cursor-pointer hover:border-gray-400 transition">
                     <input
                       type="file"
                       accept="image/*"
@@ -522,10 +523,9 @@ export default function CreatePage() {
                       className="cursor-pointer text-center flex flex-col items-center justify-center gap-2"
                     >
                       <Upload className="w-8 h-8 text-gray-400" />
-                      <p className="text-sm font-medium">Click to upload or drag and drop</p>
-                      <p className="text-xs text-gray-500 mt-1">PNG, JPG, GIF up to 5MB</p>
+                      <p className="text-xs  text-gray-500 font-medium">Click to upload </p>
+                      <p className="text-xs text-gray-500 mt-1">PNG, JPG, GIF up to 1MB</p>
                     </label>
-
                   </div>
                 ) : (
                   <div className="relative">
@@ -557,11 +557,11 @@ export default function CreatePage() {
                 <p className="text-xs text-gray-500 mt-1">
                   This content will be encrypted with AES-256 in your browser before transmission.
                 </p>
-                <InlineTip className="mt-2">
+                {/* <InlineTip className="mt-2">
                   <span className="text-xs text-gray-600 dark:text-gray-400">
                     <strong>Pro tip:</strong> For login credentials, consider sharing the username, password, and server details in separate links for enhanced security isolation.
                   </span>
-                </InlineTip>
+                </InlineTip> */}
               </div>
 
               {/* Expiration and Views - Always Visible */}
@@ -582,6 +582,7 @@ export default function CreatePage() {
                         <SelectItem value="24h">24 hours</SelectItem>
                         <SelectItem value="3d">3 days</SelectItem>
                         <SelectItem value="7d">7 days</SelectItem>
+                        <SelectItem value="10d">10 days</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
@@ -596,209 +597,19 @@ export default function CreatePage() {
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="1">1 view (burn after reading)</SelectItem>
+                        <SelectItem value="1">1 view</SelectItem>
                         <SelectItem value="3">3 views</SelectItem>
                         <SelectItem value="5">5 views</SelectItem>
                         <SelectItem value="10">10 views</SelectItem>
                         <SelectItem value="100">100 views</SelectItem>
-                        <SelectItem value="1000">♾️Unlimited  views</SelectItem>
+                        <SelectItem value="100000">Unlimited  views</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
                 </div>
               )}
-
-              {/* Advanced Settings */}
-              <Collapsible className="space-y-4" open={isAdvancedSettingsOpen} onOpenChange={setIsAdvancedSettingsOpen}>
-                <CollapsibleTrigger asChild>
-                  <Button variant="outline" className="w-full flex items-center gap-2 justify-between p-4 h-auto">
-                    <div className="flex items-center gap-2">
-                      <Settings className="w-4 h-4" />
-                      <div className="text-left">
-                        <span>Advanced Settings</span>
-                        <p className="text-xs text-gray-500 mt-1 hidden md:block">Multi-recipient, access controls & more</p>
-                        <p className="text-xs text-gray-500 mt-1 md:hidden">Multi-recipient and access controls</p>
-                      </div>
-                    </div>
-                    <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isAdvancedSettingsOpen ? 'rotate-180' : ''}`} />
-                  </Button>
-                </CollapsibleTrigger>
-                <CollapsibleContent className="space-y-6 pt-4">
-
-              {/* Multi-Recipient Toggle */}
-              {/* <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <div className="flex items-center gap-2">
-                      <Label htmlFor="multiRecipient">Multi-Recipient Sharing</Label>
-                      <Badge variant="outline" className="text-xs px-2 py-1">
-                        NEW
-                      </Badge>
-                    </div>
-                    <p className="text-sm text-gray-600">Encrypt once, generate multiple links for different recipients (max 3)</p>
-                  </div>
-                  <Switch
-                    id="multiRecipient"
-                    checked={formData.multiRecipient}
-                    onCheckedChange={(checked) => setFormData({ ...formData, multiRecipient: checked })}
-                  />
-                </div>
-
-                {formData.multiRecipient && (
-                  <Alert>
-                    <Users className="w-4 h-4" />
-                    <AlertDescription>
-                      <strong>Multi-Recipient Mode:</strong> Your content will be encrypted once, but each recipient will get their own unique link with individual expiration and access settings.
-                    </AlertDescription>
-                  </Alert>
-                )}
-              </div> */}
-
-              {/* Recipient Management */}
-              {formData.multiRecipient && (
-                <div className="space-y-4">
-                  <div>
-                    <Label className="text-base font-medium">Recipients</Label>
-                    <div className="flex gap-2 mt-2">
-                      <Input
-                        placeholder="Recipient name (e.g., John, Marketing Team)"
-                        value={newRecipientName}
-                        onChange={(e) => setNewRecipientName(e.target.value)}
-                        onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), addRecipient())}
-                      />
-                      <Button type="button" onClick={addRecipient} variant="outline">
-                        <Plus className="w-4 h-4" />
-                      </Button>
-                    </div>
-                  </div>
-
-                  {/* {recipients.length > 0 && (
-                    <div className="space-y-3">
-                      {recipients.map((recipient) => (
-                        <Card key={recipient.id} className="border-l-4 border-l-blue-500">
-                          <CardContent className="pt-4">
-                            <div className="flex items-center justify-between mb-3">
-                              <h4 className="font-medium flex items-center gap-2">
-                                <User className="w-4 h-4" />
-                                {recipient.name}
-                              </h4>
-                              <Button
-                                type="button"
-                                variant="ghost"
-                                size="sm"
-                                onClick={() => removeRecipient(recipient.id)}
-                              >
-                                <Trash2 className="w-4 h-4" />
-                              </Button>
-                            </div>
-                            
-                            
-                            <div className="grid grid-cols-2 gap-3 mb-3">
-                              <div>
-                                <Label className="text-sm">Expiration</Label>
-                                <Select
-                                  value={recipient.expirationTime}
-                                  onValueChange={(value) => updateRecipient(recipient.id, { expirationTime: value })}
-                                >
-                                  <SelectTrigger className="h-8">
-                                    <SelectValue />
-                                  </SelectTrigger>
-                                  <SelectContent>
-                                    <SelectItem value="15m">15 minutes</SelectItem>
-                                    <SelectItem value="1h">1 hour</SelectItem>
-                                    <SelectItem value="24h">24 hours</SelectItem>
-                                    <SelectItem value="7d">7 days</SelectItem>
-                                  </SelectContent>
-                                </Select>
-                              </div>
-                              
-                              <div>
-                                <Label className="text-sm">Max Views</Label>
-                                <Select
-                                  value={recipient.maxViews.toString()}
-                                  onValueChange={(value) => updateRecipient(recipient.id, { maxViews: parseInt(value) })}
-                                >
-                                  <SelectTrigger className="h-8">
-                                    <SelectValue />
-                                  </SelectTrigger>
-                                  <SelectContent>
-                                    <SelectItem value="1">1 view</SelectItem>
-                                    <SelectItem value="3">3 views</SelectItem>
-                                    <SelectItem value="5">5 views</SelectItem>
-                                    <SelectItem value="10">10 views</SelectItem>
-                                  </SelectContent>
-                                </Select>
-                              </div>
-                            </div>
-
-                            <div className="flex items-center justify-between mb-2">
-                              <Label className="text-sm">Require Password</Label>
-                              <Switch
-                                checked={recipient.requirePassword}
-                                onCheckedChange={(checked) => updateRecipient(recipient.id, { requirePassword: checked })}
-                              />
-                            </div>
-
-                            {recipient.requirePassword && (
-                              <div className="flex gap-2">
-                                <PasswordInput
-                                  placeholder="Password for this recipient"
-                                  value={recipient.password}
-                                  onChange={(e) => updateRecipient(recipient.id, { password: e.target.value })}
-                                  className="flex-1 h-8"
-                                />
-                                <Button 
-                                  type="button" 
-                                  variant="outline" 
-                                  size="sm"
-                                  onClick={() => generateSecurePassword(recipient.id)}
-                                >
-                                  <RefreshCw className="w-4 h-4" />
-                                </Button>
-                              </div>
-                            )}
-                          </CardContent>
-                        </Card>
-                      ))}
-                    </div>
-                  )} */}
-                </div>
-              )}
-
-              {/* Single Recipient Settings */}
               {!formData.multiRecipient && (
-                <>
-                  {/* <div>
-                    <Label className="text-base font-medium">Link Type</Label>
-                    <RadioGroup
-                      value={formData.linkType}
-                      onValueChange={(value) => setFormData({ ...formData, linkType: value })}
-                      className="mt-2"
-                    >
-                      <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="standard" id="standard" />
-                        <Label htmlFor="standard" className="flex items-center gap-2 cursor-pointer">
-                          <Link2 className="w-4 h-4" />
-                          Standard links (more secure)
-                        </Label>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="shorter" id="shorter" />
-                        <Label htmlFor="shorter" className="flex items-center gap-2 cursor-pointer">
-                          <Link2 className="w-4 h-4" />
-                          Shorter links (easier to share)
-                        </Label>
-                      </div>
-                    </RadioGroup>
-                    <p className="text-sm text-gray-600 mt-1">
-                      {formData.linkType === "standard" 
-                        ? "Standard links use longer, more secure identifiers for maximum security."
-                        : "Shorter links are easier to share but use shorter identifiers (still cryptographically secure)."}
-                    </p>
-                  </div> */}
-
-
-                  <div className="space-y-4">
+                 <div className="space-y-4">
                     <div className="flex items-center justify-between">
                       <div>
                         <Label htmlFor="requirePassword">Require Password</Label>
@@ -833,44 +644,8 @@ export default function CreatePage() {
                       </div>
                     )}
                   </div>
-                </>
               )}
-
-              {/* Link Type for Multi-Recipient */}
-              {formData.multiRecipient && (
-                <div>
-                  <Label className="text-base font-medium">Link Type</Label>
-                  <RadioGroup
-                    value={formData.linkType}
-                    onValueChange={(value) => setFormData({ ...formData, linkType: value })}
-                    className="mt-2"
-                  >
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="standard" id="standard-multi" />
-                      <Label htmlFor="standard-multi" className="flex items-center gap-2 cursor-pointer">
-                        <Link2 className="w-4 h-4" />
-                        Standard links (more secure)
-                      </Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="shorter" id="shorter-multi" />
-                      <Label htmlFor="shorter-multi" className="flex items-center gap-2 cursor-pointer">
-                        <Link2 className="w-4 h-4" />
-                        Shorter links (easier to share)
-                      </Label>
-                    </div>
-                  </RadioGroup>
-                  <p className="text-sm text-gray-600 mt-1">
-                    {formData.linkType === "standard" 
-                      ? "Standard links use longer, more secure identifiers for maximum security."
-                      : "Shorter links are easier to share but use shorter identifiers (still cryptographically secure)."}
-                  </p>
-                </div>
-              )}
-
-                </CollapsibleContent>
-              </Collapsible>
-
+              {/* Advanced Settings */}
               <Button type="submit" className="w-full bg-red-600 hover:bg-red-700 text-white" disabled={isLoading}>
                 {isLoading ? "Creating Secure Links..." : formData.multiRecipient ? "Create Secure Links" : "Create Secure Link"}
               </Button>

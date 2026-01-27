@@ -82,6 +82,7 @@ interface ShareData {
   requirePassword: boolean
   passwordHash?: string
   createdAt: string
+  imgUrl?:string
 }
 
 interface FileStorage {
@@ -176,6 +177,8 @@ function getExpirationTime(timeString: string): Date {
       return new Date(now.getTime() + 3 * 24 * 60 * 60 * 1000)
     case "7d":
       return new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000)
+    case "10d":  
+      return new Date(now.getTime() + 10 * 24 * 60 * 60 * 1000)
     default:
       return new Date(now.getTime() + 60 * 60 * 1000)
   }
@@ -415,6 +418,7 @@ export async function createSecureShare(data: {
       requirePassword: data.requirePassword,
       passwordHash: data.requirePassword && data.password ? hashPassword(data.password) : undefined,
       createdAt: now.toISOString(),
+      imgUrl:data.imgUrl
     }
 
     // Calculate TTL in seconds
