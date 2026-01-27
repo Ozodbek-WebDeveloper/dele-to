@@ -532,6 +532,7 @@ export async function getSecureShare(id: string, password?: string) {
         maxViews: share.maxViews,
         currentViews: share.currentViews,
         requirePassword: share.requirePassword,
+        imgUrl: share.imgUrl
       },
     }
   } catch (error) {
@@ -571,6 +572,7 @@ export async function getShareMetadata(id: string) {
         maxViews: share.maxViews,
         currentViews: share.currentViews,
         requirePassword: share.requirePassword,
+        imgUrl: share.imgUrl
       },
     }
   } catch (error) {

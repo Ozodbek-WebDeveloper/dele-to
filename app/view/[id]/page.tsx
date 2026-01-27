@@ -14,6 +14,7 @@ import { getSecureShare, getShareMetadata, testShareExists } from "../../actions
 import { SecureCrypto } from "../../../lib/crypto"
 import { AccessTips } from "@/components/access-tips"
 import { PasswordInput } from "@/components/password-input"
+import { set } from "zod"
 
 interface SecureShare {
   id: string
