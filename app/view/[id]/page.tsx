@@ -221,10 +221,8 @@ export default function ViewPage({ params }: { params: { id: string } }) {
             <CardHeader>
               <div className="flex justify-center mb-4">
                 <div className="p-3 bg-green-100 rounded-full">
-                  <Shield className="w-8 h-8 text-green-600" />
+                  <img src={share.imgUrl || "/default-image.png"} alt="Share Image" />
                 </div>
-                imgUrl:{share.imgUrl}
-                
               </div>
               <CardTitle className="text-center">{share.title || "Secure Content"}</CardTitle>
               <CardDescription className="text-center">
@@ -293,7 +291,7 @@ export default function ViewPage({ params }: { params: { id: string } }) {
           <CardHeader className="text-center">
             <div className="flex justify-center mb-4">
               <div className="p-3 bg-blue-100 rounded-full">
-                <Shield className="w-8 h-8 text-blue-600" />
+                 <img src={metadata?.imgUrl || "/default-image.png"} alt="Share Image" />
               </div>
             </div>
             <CardTitle>Access Secure Content</CardTitle>
@@ -302,8 +300,6 @@ export default function ViewPage({ params }: { params: { id: string } }) {
               <br />
               
               Share ID: {shareId}
-              <br />
-              imgUrl:{metadata?.imgUrl}
               <br />
               Client-side decryption with AES-256
             </CardDescription>

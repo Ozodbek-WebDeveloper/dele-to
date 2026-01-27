@@ -402,7 +402,7 @@ export default function CreatePage() {
               </Alert>
 
               <Alert>
-                <Shield className="w-4 h-4" />
+                 <img src={localImagesPreview || "/default-image.png"} alt="Share Image" />
                 <AlertDescription>
                   <strong>Important:</strong> Each link will expire based on its individual settings. Your data is encrypted with
                   AES-256 and can only be decrypted by someone with the complete link.
