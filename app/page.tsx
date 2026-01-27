@@ -272,6 +272,7 @@ export default function CreatePage() {
       }
 
       setGeneratedLinks(links)
+      removeImage()
     } catch (error) {
       console.error("Failed to create secure share:", error)
       setError("Failed to create secure share. Please try again.")
@@ -309,7 +310,7 @@ export default function CreatePage() {
           <Card>
             <CardHeader className="text-center">
               <div className="flex justify-center mb-4">
-                {localImagesPreview ? (
+                {generatedLinks[0]?.imgUrl ? (
                   <div className="relative">
                     <img 
                       src={generatedLinks[0]?.imgUrl} 
