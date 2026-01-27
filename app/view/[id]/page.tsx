@@ -305,7 +305,7 @@ export default function ViewPage({ params }: { params: { id: string } }) {
                   <img 
                     src={metadata.imgUrl} 
                     alt="Share Image" 
-                    className="w-32 h-32 rounded-lg object-cover shadow-lg border-4 border-blue-100"
+                    className="w-32 h-32 rounded-full object-cover shadow-lg border-4 border-blue-100"
                   />
                 </div>
               ) : (
