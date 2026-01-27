@@ -50,25 +50,65 @@ export default function CreatePage() {
     linkType: "standard", // "standard" or "shorter"
     multiRecipient: false,
   })
-
+  
+  const IMGBB_API_KEY = '6e1ff9f433cba8d29826a9d043d11562'
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
     // size check (5MB)
-    if (file.size > 5 * 1024 * 1024) {
-      alert("Image must be less than 5MB");
+    if (file.size > 2 * 1024 * 1024) {
+      setError("Image must be less than 1MB");
       return;
     }
+    setError("")
 
     setLocalImage(file);
     setLocalImagesPreview(URL.createObjectURL(file));
   };
+
   const removeImage = () => {
-  setLocalImage(null);
-  setLocalImagesPreview(null);
-};
+    setLocalImage(null);
+    setLocalImagesPreview(null);
+  };
+
+  const uploadImages = async (): Promise<string | undefined> => {
+    if (!localImage) return;
+
+    const getBase64 = (file: File): Promise<string> =>
+      new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+          const base64 = reader.result?.toString().split(",")[1];
+          base64 ? resolve(base64) : reject("Base64 error");
+        };
+        reader.onerror = reject;
+      });
+
+    const base64 = await getBase64(localImage);
+
+    const formData = new FormData();
+    formData.append("image", base64);
+
+    const res = await fetch(
+      `https://api.imgbb.com/1/upload?key=${IMGBB_API_KEY}`,
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
+
+    const data = await res.json();
+    if (!data.success) {
+      throw new Error("ImgBB yuklashda xatolik");
+    }
+
+    return data.data.url;
+  } ;
+
+
 
   const [localImage, setLocalImage] = useState<File | null>(null);
   const [localImagesPreview, setLocalImagesPreview] = useState<string | null>(null);
@@ -143,7 +183,9 @@ export default function CreatePage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!isClient) return
-
+    
+    const imageUrl = await uploadImages();
+    console.log(imageUrl)
     // Validate form data
     if (!formData.content.trim()) {
       setError("Please enter some content to share")
@@ -193,6 +235,7 @@ export default function CreatePage() {
           requirePassword: recipient.requirePassword,
           password: recipient.password,
           linkType: formData.linkType,
+          imgUrl:imageUrl
         })
 
         if (result.success && result.id) {

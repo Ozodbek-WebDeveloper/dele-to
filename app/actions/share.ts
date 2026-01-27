@@ -367,6 +367,7 @@ export async function createSecureShare(data: {
   requirePassword: boolean
   password?: string
   linkType?: string
+  imgUrl?:string
 }) {
   log("🚀 Creating secure share with data:", {
     title: data.title,
