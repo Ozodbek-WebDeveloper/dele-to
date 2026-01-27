@@ -91,6 +91,7 @@ export default function ViewPage({ params }: { params: { id: string } }) {
             maxViews: shareData.maxViews,
             currentViews: shareData.currentViews,
             requirePassword: shareData.requirePassword,
+            imgUrl: shareData.imgUrl
           })
         } else {
           setError(result.error || "Failed to load share metadata")
@@ -220,9 +221,9 @@ export default function ViewPage({ params }: { params: { id: string } }) {
               <div className="flex justify-center mb-4">
                 <div className="p-3 bg-green-100 rounded-full">
                   <Shield className="w-8 h-8 text-green-600" />
-                  imgUrl:
-                  {share.imgUrl && (<img src={share.imgUrl} alt="Share Image" className="w-8 h-8 rounded-full absolute -top-2 -right-2 border border-white" />)}
                 </div>
+                imgUrl:
+                  {share.imgUrl && (<img src={share.imgUrl} alt="Share Image" className="w-8 h-8 rounded-full absolute -top-2 -right-2 border border-white" />)}
               </div>
               <CardTitle className="text-center">{share.title || "Secure Content"}</CardTitle>
               <CardDescription className="text-center">
