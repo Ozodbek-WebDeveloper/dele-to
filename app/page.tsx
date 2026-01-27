@@ -41,6 +41,7 @@ interface GeneratedLink {
   expirationTime: string
   maxViews: number
   requirePassword: boolean
+  imgUrl?:string
 }
 
 export default function CreatePage() {
@@ -262,6 +263,7 @@ export default function CreatePage() {
             expirationTime: recipient.expirationTime,
             maxViews: recipient.maxViews,
             requirePassword: recipient.requirePassword,
+            imgUrl:imageUrl
           })
         } else {
           setError(result.error || `Failed to create secure share for ${recipient.name}`)

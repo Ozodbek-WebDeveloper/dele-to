@@ -299,7 +299,7 @@ export default function ViewPage({ params }: { params: { id: string } }) {
               
               Share ID: {shareId}
               <br />
-              imgUrl:{metadata? metadata : ''}
+              {/* imgUrl:{metadata? metadata : null} */}
               <br />
               Client-side decryption with AES-256
             </CardDescription>
