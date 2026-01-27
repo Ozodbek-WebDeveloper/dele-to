@@ -223,8 +223,8 @@ export default function ViewPage({ params }: { params: { id: string } }) {
                 <div className="p-3 bg-green-100 rounded-full">
                   <Shield className="w-8 h-8 text-green-600" />
                 </div>
-                imgUrl:
-                  {share.imgUrl && (<img src={share.imgUrl} alt="Share Image" className="w-8 h-8 rounded-full absolute -top-2 -right-2 border border-white" />)}
+                imgUrl:{share.imgUrl}
+                
               </div>
               <CardTitle className="text-center">{share.title || "Secure Content"}</CardTitle>
               <CardDescription className="text-center">
