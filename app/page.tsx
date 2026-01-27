@@ -312,7 +312,7 @@ export default function CreatePage() {
                 {localImagesPreview ? (
                   <div className="relative">
                     <img 
-                      src={localImagesPreview} 
+                      src={generatedLinks[0]?.imgUrl} 
                       alt="Share Image" 
                       className="w-32 h-32 rounded-full object-cover shadow-lg border-4 border-green-100"
                     />
