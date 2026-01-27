@@ -14,7 +14,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Badge } from "@/components/ui/badge"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
-import { Copy, Shield, ArrowLeft, Key, RefreshCw, AlertTriangle, Link2, QrCode, Plus, Upload, Trash2, Users, User, X, Tag, ChevronDown, Settings, Crown } from "lucide-react"
+import { Copy, Shield, ArrowLeft, Key, RefreshCw, AlertTriangle, QrCode, Plus, Users, User, PenLine } from "lucide-react"
 import Link from "next/link"
 import { createSecureShare } from "./actions/share"
 import { SecureCrypto } from "../lib/crypto"
@@ -495,6 +495,41 @@ export default function CreatePage() {
         
         <Card>
           <CardHeader>
+          {!localImagesPreview ? (
+                  <div className="border-2 w-32 h-32  overflow-hidden mx-auto border-dashed border-gray-300 dark:border-gray-600 rounded-full p-6 text-center cursor-pointer hover:border-gray-400 transition">
+                    <input
+                      type="file"
+                      accept="image/*"
+                      className="hidden"
+                      id="image-input"
+                      onChange={handleImageChange}
+                      required
+                    />
+                    <label
+                      htmlFor="image-input"
+                      className="cursor-pointer text-center flex flex-col items-center justify-center gap-2"
+                    >
+                      <Plus className="w-8 h-8 text-gray-400" />
+                      <p className="text-xs  text-gray-500 font-medium">Click to upload </p>
+                      {/* <p className="text-xs text-gray-500 mt-1">PNG, JPG, up to 1MB</p> */}
+                    </label>
+                  </div>
+                ) : (
+                  <div className=" relative w-32 h-32  mx-auto border-dashed border-gray-300 dark:border-gray-600 rounded-full text-center cursor-pointer hover:border-gray-400 transition">
+                    <img
+                      src={localImagesPreview}
+                      alt="Preview"
+                      className="w-full h-full rounded-full object-cover shadow-lg border-2 border-green-100"
+                    />
+                    <button
+                      type="button"
+                      onClick={removeImage}
+                      className="absolute -right-2 bottom-5 text-green-600 bg-green-50 rounded-full p-1 "
+                    >
+                      <PenLine className="w-5 h-5" />
+                    </button>
+                  </div>
+                )}
             <CardTitle>Create Secure Share</CardTitle>
             <CardDescription>
               Encrypt and share sensitive information with client-side AES-256 encryption
@@ -522,41 +557,7 @@ export default function CreatePage() {
              
               <div className="space-y-3 p-4 border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
                 <Label htmlFor="content" className="text-base font-medium">Secret Content *</Label>
-                {!localImagesPreview ? (
-                  <div className="border-2 w-40 h-[40%] mx-auto border-dashed border-gray-300 dark:border-gray-600 rounded-full p-6 text-center cursor-pointer hover:border-gray-400 transition">
-                    <input
-                      type="file"
-                      accept="image/*"
-                      className="hidden"
-                      id="image-input"
-                      onChange={handleImageChange}
-                    />
-                    <label
-                      htmlFor="image-input"
-                      className="cursor-pointer text-center flex flex-col items-center justify-center gap-2"
-                    >
-                      <Upload className="w-8 h-8 text-gray-400" />
-                      <p className="text-xs  text-gray-500 font-medium">Click to upload </p>
-                      <p className="text-xs text-gray-500 mt-1">PNG, JPG, GIF up to 1MB</p>
-                    </label>
-                  </div>
-                ) : (
-                  <div className="relative">
-                    <img
-                      src={localImagesPreview}
-                      alt="Preview"
-                      className="max-h-64 mx-auto rounded-lg"
-                    />
-                    <button
-                      type="button"
-                      onClick={removeImage}
-                      className="mt-3 w-full bg-red-600 hover:bg-red-700 text-white py-2 rounded flex items-center justify-center gap-2"
-                    >
-                      <X className="w-4 h-4" />
-                      Remove Image
-                    </button>
-                  </div>
-                )}
+                
 
                 
                 <Textarea
