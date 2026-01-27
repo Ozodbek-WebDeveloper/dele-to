@@ -4,15 +4,14 @@ const cspHeader = `
     default-src 'self';
     script-src 'self' 'unsafe-eval' 'unsafe-inline';
     style-src 'self' 'unsafe-inline';
-    img-src 'self' blob: data:;
+    img-src 'self' blob: data: https://i.ibb.co https://*.ibb.co;
     font-src 'self';
     object-src 'none';
     base-uri 'self';
     form-action 'self';
     frame-ancestors 'none';
     upgrade-insecure-requests;
-    connect-src 'self' https://api.imgbb.com;
-    img-src 'self' https://i.ibb.co data:;
+    connect-src 'self' https://api.imgbb.com https://i.ibb.co https://*.ibb.co;
 `
 
 /** @type {import('next').NextConfig} */
