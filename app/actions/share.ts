@@ -599,6 +599,7 @@ export async function debugListShares() {
         expired: value.expiresAt <= Date.now(),
         currentViews: value.data?.currentViews,
         maxViews: value.data?.maxViews,
+        imgUrl: value.data?.imgUrl,
       })
     }
 
@@ -614,6 +615,7 @@ export async function debugListShares() {
           expired: value.expiresAt <= Date.now(),
           currentViews: value.data?.currentViews,
           maxViews: value.data?.maxViews,
+          imgUrl: value.data?.imgUrl,
         })),
       },
     }
