@@ -24,6 +24,7 @@ interface SecureShare {
   maxViews: number
   currentViews: number
   requirePassword: boolean
+  imgUrl?:string
 }
 
 interface ShareMetadata {
@@ -33,6 +34,7 @@ interface ShareMetadata {
   maxViews: number
   currentViews: number
   requirePassword: boolean
+  imgUrl?:string
 }
 
 export default function ViewPage({ params }: { params: { id: string } }) {
@@ -294,7 +296,10 @@ export default function ViewPage({ params }: { params: { id: string } }) {
             <CardDescription>
               {metadata?.title && `Accessing: ${metadata.title}`}
               <br />
+              
               Share ID: {shareId}
+              <br />
+              imgUrl:{metadata?.imgUrl}
               <br />
               Client-side decryption with AES-256
             </CardDescription>
