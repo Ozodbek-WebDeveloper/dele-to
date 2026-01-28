@@ -533,7 +533,7 @@ export default function CreatePage() {
           </Link> */}
         </div>
 
-        <SecurityTips />
+        {/* <SecurityTips /> */}
         
         <Card>
           <CardHeader>
@@ -544,21 +544,16 @@ export default function CreatePage() {
                 className="hidden"
                 onChange={handleImageChange}
               />
-
+            <CardTitle>Upload Logo*</CardTitle>
           {!localImagesPreview ? (
             <div
               onClick={() => fileInputRef.current?.click()}
-              className="border-2 w-32 h-32 overflow-hidden mx-auto border-dashed border-gray-300 dark:border-gray-600 rounded-full p-6 text-center cursor-pointer hover:border-gray-400 transition"
+              className="border-2 w-24 h-24 flex flex items-center justify-center overflow-hidden mx-auto border-dashed border-gray-300 dark:border-gray-600 rounded-full p-6 text-center cursor-pointer hover:border-gray-400 transition"
             >
-              <div className="flex flex-col items-center justify-center gap-2">
-                <Plus className="w-8 h-8 text-gray-400" />
-                <p className="text-xs text-gray-500 font-medium">
-                  Click to upload
-                </p>
-              </div>
+                <Plus className=" w-10 h-10 text-gray-400" />
             </div>
             ) : (
-              <div className="relative w-32 h-32 mx-auto rounded-full cursor-pointer">
+              <div className="relative w-24 h-24 mx-auto rounded-full cursor-pointer">
                 <img
                   src={localImagesPreview}
                   alt="Preview"
@@ -571,9 +566,9 @@ export default function CreatePage() {
                     removeImage();
                     fileInputRef.current?.click();
                   }}
-                  className="absolute -right-2 bottom-5 text-green-600 bg-white border border-white rounded-full p-1"
+                  className="absolute -right-1 bottom-2 text-green-600 bg-white border border-white rounded-full p-1"
                 >
-                  <PenLine className="w-5 h-5" />
+                  <PenLine className="w-4 h-4" />
                 </button>
               </div>
             )}
@@ -593,7 +588,7 @@ export default function CreatePage() {
               )}
 
                 <div>
-                <Label htmlFor="title">Title (Optional)</Label>
+                <Label htmlFor="title">Title*</Label>
                 <Input
                   id="title"
                   placeholder="e.g., Database Password, API Key"
@@ -629,19 +624,15 @@ export default function CreatePage() {
                 </InlineTip> */}
               </div>
               
-              <button
+              <Button
                     type="button"
                      onClick={() => fileRef.current?.click()}
-                    className="w-full flex items-center justify-center gap-2
-                              bg-neutral-800 hover:bg-neutral-700
-                              text-white font-medium
-                              py-3 rounded-xl
-                              shadow-lg transition"
+                    className="w-full"
                   >
                     <Upload className="w-5 h-5" />
 
                     Attach files
-              </button>
+              </Button>
               {files.length > 0 && (
                 <div className="bg-neutral-900 rounded-lg p-3 text-sm text-gray-300 space-y-2">
                   {files.map((file, index) => (

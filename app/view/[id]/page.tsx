@@ -227,7 +227,7 @@ export default function ViewPage({ params }: { params: { id: string } }) {
                     <img 
                       src={share.imgUrl} 
                       alt="Share Image" 
-                      className="w-32 h-32 rounded-full object-cover shadow-lg border-4 border-green-100"
+                      className="w-24 h-24 rounded-full object-cover shadow-lg border-4 border-green-100"
                     />
                   </div>
                 ) : (
@@ -365,7 +365,7 @@ export default function ViewPage({ params }: { params: { id: string } }) {
                   <img 
                     src={metadata.imgUrl} 
                     alt="Share Image" 
-                    className="w-32 h-32 rounded-full object-cover shadow-lg border-4 border-blue-100"
+                    className="w-24 h-24 rounded-full object-cover shadow-lg border-4 border-blue-100"
                   />
                 </div>
               ) : (
@@ -454,7 +454,7 @@ export default function ViewPage({ params }: { params: { id: string } }) {
             </Alert>
 
             <div className="mt-6 text-center">
-              <Link href="">
+              <Link href="/">
                 <Button variant="outline">Create Your Own Secure Share</Button>
               </Link>
             </div>
