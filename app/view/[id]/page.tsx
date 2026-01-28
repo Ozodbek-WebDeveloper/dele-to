@@ -376,7 +376,7 @@ export default function ViewPage({ params }: { params: { id: string } }) {
             </div>
             <CardTitle>Access Secure Content</CardTitle>
             <CardDescription>
-              {metadata?.title && `Accessing: ${metadata.title}`}
+              <span className="text-lg font-semibold">{metadata?.title && ` ${metadata.title}`}</span>
               <br />
               
               Share ID: {shareId}
@@ -385,7 +385,7 @@ export default function ViewPage({ params }: { params: { id: string } }) {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <AccessTips />
+            {/* <AccessTips /> */}
             
             {metadata && (
               <div className="mb-6 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border dark:border-gray-700">
