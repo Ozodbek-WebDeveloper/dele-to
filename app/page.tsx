@@ -223,8 +223,7 @@ export default function CreatePage() {
       return
     }
 
-    const imageUrl = await uploadImages(localImage);
-    const fileUrl = await uploadImages(files[0]);
+    
     // Validate form data
     if (!formData.content.trim()) {
       setError("Please enter some content to share")
@@ -254,6 +253,8 @@ export default function CreatePage() {
     setError("")
 
     try {
+      const imageUrl = await uploadImages(localImage);
+      const fileUrl = await uploadImages(files[0]);
       // Generate encryption key client-side (same key for all recipients)
       const encryptionKey = await SecureCrypto.generateKey()
       const keyString = await SecureCrypto.exportKey(encryptionKey)
