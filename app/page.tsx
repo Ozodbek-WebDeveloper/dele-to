@@ -591,7 +591,7 @@ export default function CreatePage() {
                 <Label htmlFor="title">Title*</Label>
                 <Input
                   id="title"
-                  placeholder="e.g., Database Password, API Key"
+                  placeholder="Information, Condition, Description…"
                   value={formData.title}
                   onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                   required
@@ -605,7 +605,7 @@ export default function CreatePage() {
                 
                 <Textarea
                   id="content"
-                  placeholder="Enter your password, API key, or sensitive information here..."
+                  placeholder="Write or paste your sensitive information here…"
                   value={formData.content}
                   onChange={(e) => setFormData({ ...formData, content: e.target.value })}
                   required
@@ -631,7 +631,7 @@ export default function CreatePage() {
                   >
                     <Upload className="w-5 h-5" />
 
-                    Attach files
+                    Attach file
               </Button>
               {files.length > 0 && (
                 <div className="bg-neutral-900 rounded-lg p-3 text-sm text-gray-300 space-y-2">
