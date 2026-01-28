@@ -64,7 +64,7 @@ export default function RootLayout({
         >
           <ConsoleMessage />
           <main className="flex-1">{children}</main>
-          {/* <Footer /> */}
+          <Footer />
         </ThemeProvider>
       </body>
     </html>

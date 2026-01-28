@@ -6,7 +6,19 @@ export function Footer() {
     return (
         <footer className="border-t bg-background">
             <div className="container mx-auto px-4 py-8">
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+                
+
+                <div className=" mt-8 pt-6 text-center text-sm text-muted-foreground">
+                    <p>© {new Date().getFullYear()} © Copyright Vlagit.com <br /> Built with ❤️ By Your B2C Secure Vlag</p>
+                    <div className="mt-2">
+                    </div>
+                </div>
+            </div>
+        </footer>
+    )
+}
+
+{/* <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                     {/* Brand */}
                     <div className="space-y-3">
                         <h3 className="font-semibold text-lg">DELE.TO</h3>
@@ -107,23 +119,4 @@ export function Footer() {
                             </li> */}
                         </ul>
                     </div>
-                </div>
-
-                <div className="border-t mt-8 pt-6 text-center text-sm text-muted-foreground">
-                    <p>© {new Date().getFullYear()} © Copyright DELE.TO. Built with ❤️ for secure sharing.</p>
-                    <div className="mt-2">
-                        <a
-                            href="https://github.com/dele-to/dele-to"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-2 text-foreground hover:underline"
-                        >
-                            <GitHubLogoIcon className="h-4 w-4" />
-                            <span className="font-medium">Open source on GitHub</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </footer>
-    )
-}
+                // </div> */}
