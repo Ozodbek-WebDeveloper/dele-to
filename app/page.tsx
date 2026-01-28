@@ -748,7 +748,7 @@ export default function CreatePage() {
               )}
               {/* Advanced Settings */}
               <Button type="submit" className="w-full bg-red-600 hover:bg-red-700 text-white" disabled={isLoading}>
-                {isLoading ? "Creating Secure Links..." : formData.multiRecipient ? "Create Secure Links Vlag It " : "Create Secure Link Vlag It "}
+                {isLoading ? "Creating Secure Links..." : formData.multiRecipient ? "Vlag It " : "Vlag It "}
               </Button>
             </form>
           </CardContent>
