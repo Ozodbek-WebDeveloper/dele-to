@@ -285,7 +285,7 @@ export default function ViewPage({ params }: { params: { id: string } }) {
 
 
                         <div className="min-w-0">
-                          <p className="text-white truncate">Secure File</p>
+                          <p className="text-white truncate">Secure File.jpg</p>
                           {/* <p className="text-xs text-gray-500">
                             {(file.size / 1024).toFixed(2)} KiB
                           </p> */}
@@ -294,13 +294,23 @@ export default function ViewPage({ params }: { params: { id: string } }) {
                       </div>
 
                       <button
-                        onClick={() => {
-                        const url = URL.createObjectURL(share.fileUrl as any);
+                        onClick={async () => {
+                        if (!share.fileUrl) return;
+                        
+                        const res = await fetch(share.fileUrl);
+                        const blob = await res.blob();
+
+                        const url = URL.createObjectURL(blob);
                         const a = document.createElement("a");
+
                         a.href = url;
-                        a.download = share.fileUrl || "downloaded_file";
+                        a.download =  "SecureFile.jpg";
                         a.click();
-                        URL.revokeObjectURL(url)}}
+
+                        URL.revokeObjectURL(url);
+                      }}
+
+
                         type="button"
                         className="flex items-center gap-2
                                   bg-neutral-800 hover:bg-neutral-700
