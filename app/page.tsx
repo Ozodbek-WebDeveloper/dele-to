@@ -544,16 +544,16 @@ export default function CreatePage() {
                 className="hidden"
                 onChange={handleImageChange}
               />
-            <CardTitle>Upload Logo*</CardTitle>
+            {/* <CardTitle>Upload Logo*</CardTitle> */}
           {!localImagesPreview ? (
             <div
               onClick={() => fileInputRef.current?.click()}
-              className="border-2 w-24 h-24  !my-10  flex flex items-center justify-center overflow-hidden mx-auto border-dashed border-gray-300 dark:border-gray-600 rounded-full p-6 text-center cursor-pointer hover:border-gray-400 transition"
+              className="border-2 w-24 h-24  !mt-10  flex flex items-center justify-center overflow-hidden mx-auto border-dashed border-gray-300 dark:border-gray-600 rounded-full p-6 text-center cursor-pointer hover:border-gray-400 transition"
             >
                 <Plus className=" w-10 h-10 text-gray-400" />
             </div>
             ) : (
-              <div className="relative w-24 h-24 !my-10 mx-auto rounded-full cursor-pointer">
+              <div className="relative w-24 h-24 !mt-10 mx-auto rounded-full cursor-pointer">
                 <img
                   src={localImagesPreview}
                   alt="Preview"
@@ -572,8 +572,8 @@ export default function CreatePage() {
                 </button>
               </div>
             )}
-
-            <CardTitle >Create Secure Vlags</CardTitle>
+              <span className="text-xs text-center text-gray-500 !mt-2 !mb-10">Upload Logo*</span>
+            <CardTitle >Create Secure Vlag</CardTitle>
             <CardDescription>
               Encrypt and share sensitive information with client-side AES-256 encryption
             </CardDescription>
@@ -748,7 +748,7 @@ export default function CreatePage() {
               )}
               {/* Advanced Settings */}
               <Button type="submit" className="w-full bg-red-600 hover:bg-red-700 text-white" disabled={isLoading}>
-                {isLoading ? "Creating Secure Links..." : formData.multiRecipient ? "Create Secure Links Vlags It " : "Create Secure Link Vlags It "}
+                {isLoading ? "Creating Secure Links..." : formData.multiRecipient ? "Create Secure Links Vlag It " : "Create Secure Link Vlag It "}
               </Button>
             </form>
           </CardContent>
