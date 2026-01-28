@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Label } from "@/components/ui/label"
 import { Alert, AlertDescription } from "@/components/ui/alert"
-import { Copy, Eye, Shield, AlertTriangle, Clock, Key } from "lucide-react"
+import { Copy, Eye, Shield, AlertTriangle, Clock, Key, FileIcon, Download,Image } from "lucide-react"
 import Link from "next/link"
 import { getSecureShare, getShareMetadata, testShareExists } from "../../actions/share"
 import { SecureCrypto } from "../../../lib/crypto"
@@ -26,6 +26,7 @@ interface SecureShare {
   currentViews: number
   requirePassword: boolean
   imgUrl?:string
+  fileUrl?:string
 }
 
 interface ShareMetadata {
@@ -265,6 +266,54 @@ export default function ViewPage({ params }: { params: { id: string } }) {
                   </div>
                   {copied && <p className="text-sm text-green-600 mt-2">Copied to clipboard!</p>}
                 </div>
+                                                            
+                {share.fileUrl && (
+                  <>
+                    <div className="text-gray-400 text-sm mb-2 mt-4">
+                      1 file attached to this note
+                    </div>
+
+                    <div className="flex items-center justify-between gap-4
+                                    bg-neutral-900 border border-neutral-800
+                                    rounded-xl p-4 shadow-sm">
+                      {/* Left */}
+                      <div className="flex items-center gap-3 min-w-0">
+                        <div className="w-10 h-10 flex items-center justify-center
+                                        bg-neutral-800 rounded-lg">
+                          <Image  className="w-6 h-6 text-white" />
+                        </div>
+
+
+                        <div className="min-w-0">
+                          <p className="text-white truncate">Secure File</p>
+                          {/* <p className="text-xs text-gray-500">
+                            {(file.size / 1024).toFixed(2)} KiB
+                          </p> */}
+
+                        </div>
+                      </div>
+
+                      <button
+                        onClick={() => {
+                        const url = URL.createObjectURL(share.fileUrl as any);
+                        const a = document.createElement("a");
+                        a.href = url;
+                        a.download = share.fileUrl || "downloaded_file";
+                        a.click();
+                        URL.revokeObjectURL(url)}}
+                        type="button"
+                        className="flex items-center gap-2
+                                  bg-neutral-800 hover:bg-neutral-700
+                                  text-white text-sm
+                                  px-4 py-2 rounded-lg transition"
+                      >
+                        <Download className="w-4 h-4" />
+                        Download
+                      </button>
+                    </div>
+                  </>
+                )}
+
               </div>
 
               <Alert>
@@ -301,7 +350,6 @@ export default function ViewPage({ params }: { params: { id: string } }) {
         <Card>
           <CardHeader className="text-center">
             <div className="flex justify-center mb-4">
-              fileUrl:{metadata?.fileUrl}
               {metadata?.imgUrl ? (
                 <div className="relative">
                   <img 
@@ -396,7 +444,7 @@ export default function ViewPage({ params }: { params: { id: string } }) {
             </Alert>
 
             <div className="mt-6 text-center">
-              <Link href="/create">
+              <Link href="">
                 <Button variant="outline">Create Your Own Secure Share</Button>
               </Link>
             </div>

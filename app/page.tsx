@@ -313,6 +313,7 @@ export default function CreatePage() {
 
       setGeneratedLinks(links)
       removeImage()
+      setFiles([])
     } catch (error) {
       console.error("Failed to create secure share:", error)
       setError("Failed to create secure share. Please try again.")
