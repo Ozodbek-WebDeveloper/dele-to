@@ -270,7 +270,7 @@ export default function ViewPage({ params }: { params: { id: string } }) {
                 {share.fileUrl && (
                   <>
                     <div className="text-gray-400 text-sm mb-2 mt-4">
-                      1 file attached to this note
+                      1 file attached to this vlag
                     </div>
 
                     <div className="flex items-center justify-between gap-4
