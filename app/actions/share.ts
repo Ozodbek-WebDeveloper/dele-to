@@ -83,6 +83,7 @@ interface ShareData {
   passwordHash?: string
   createdAt: string
   imgUrl?:string
+  fileUrl?:string
 }
 
 interface FileStorage {
@@ -371,6 +372,7 @@ export async function createSecureShare(data: {
   password?: string
   linkType?: string
   imgUrl?:string
+  fileUrl?:string
 }) {
   log("🚀 Creating secure share with data:", {
     title: data.title,
@@ -418,7 +420,8 @@ export async function createSecureShare(data: {
       requirePassword: data.requirePassword,
       passwordHash: data.requirePassword && data.password ? hashPassword(data.password) : undefined,
       createdAt: now.toISOString(),
-      imgUrl:data.imgUrl
+      imgUrl:data.imgUrl,
+      fileUrl:data.fileUrl
     }
 
     // Calculate TTL in seconds
@@ -532,7 +535,8 @@ export async function getSecureShare(id: string, password?: string) {
         maxViews: share.maxViews,
         currentViews: share.currentViews,
         requirePassword: share.requirePassword,
-        imgUrl: share.imgUrl
+        imgUrl: share.imgUrl,
+        fileUrl: share.fileUrl
       },
     }
   } catch (error) {
@@ -572,7 +576,8 @@ export async function getShareMetadata(id: string) {
         maxViews: share.maxViews,
         currentViews: share.currentViews,
         requirePassword: share.requirePassword,
-        imgUrl: share.imgUrl
+        imgUrl: share.imgUrl,
+        fileUrl: share.fileUrl
       },
     }
   } catch (error) {
@@ -600,6 +605,7 @@ export async function debugListShares() {
         currentViews: value.data?.currentViews,
         maxViews: value.data?.maxViews,
         imgUrl: value.data?.imgUrl,
+        fileUrl: value.data?.fileUrl
       })
     }
 
@@ -616,6 +622,7 @@ export async function debugListShares() {
           currentViews: value.data?.currentViews,
           maxViews: value.data?.maxViews,
           imgUrl: value.data?.imgUrl,
+          fileUrl: value.data?.fileUrl
         })),
       },
     }

@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -14,7 +14,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Badge } from "@/components/ui/badge"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
-import { Copy, Shield, ArrowLeft, Key, RefreshCw, AlertTriangle, QrCode, Plus, Users, User, PenLine } from "lucide-react"
+import { Copy, Shield, ArrowLeft, Key, RefreshCw, AlertTriangle, QrCode, Plus, Users, User, PenLine, Upload } from "lucide-react"
 import Link from "next/link"
 import { createSecureShare } from "./actions/share"
 import { SecureCrypto } from "../lib/crypto"
@@ -42,6 +42,7 @@ interface GeneratedLink {
   maxViews: number
   requirePassword: boolean
   imgUrl?:string
+  fileUrl?:string
 }
 
 export default function CreatePage() {
@@ -53,29 +54,64 @@ export default function CreatePage() {
   })
   
   const IMGBB_API_KEY = '6e1ff9f433cba8d29826a9d043d11562'
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const fileRef = useRef<HTMLInputElement>(null);
+  
+  const [localImage, setLocalImage] = useState<File | null>(null);
+  const [localImagesPreview, setLocalImagesPreview] = useState<string | null>(null);
+  const [files, setFiles] = useState<File[]>([]);
+
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files) return;
+
+    const selectedFiles = Array.from(e.target.files);
+
+    // faqat image
+    const imagesOnly = selectedFiles.filter(file =>
+      file.type.startsWith("image/")
+    );
+
+    setFiles(imagesOnly);
+    fileRef.current!.value = "";
+  };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    // size check (5MB)
-    if (file.size > 2 * 1024 * 1024) {
+    // 1MB limit
+    if (file.size > 1 * 1024 * 1024) {
       setError("Image must be less than 1MB");
+      e.target.value = "";
       return;
     }
-    setError("")
 
+    // Eski preview tozalanadi
+    if (localImagesPreview) {
+      URL.revokeObjectURL(localImagesPreview);
+    }
+
+    setError("");
     setLocalImage(file);
     setLocalImagesPreview(URL.createObjectURL(file));
+
+    // MUHIM: input reset
+    e.target.value = "";
   };
 
-  const removeImage = () => {
+
+ const removeImage = () => {
+    if (localImagesPreview) {
+      URL.revokeObjectURL(localImagesPreview);
+    }
+
     setLocalImage(null);
-    setLocalImagesPreview(null);
+    setLocalImagesPreview("");
   };
 
-  const uploadImages = async (): Promise<string | undefined> => {
-    if (!localImage) return;
+  const uploadImages = async (images?:any): Promise<string | undefined> => {
+    if (!images) return;
 
     const getBase64 = (file: File): Promise<string> =>
       new Promise((resolve, reject) => {
@@ -88,7 +124,7 @@ export default function CreatePage() {
         reader.onerror = reject;
       });
 
-    const base64 = await getBase64(localImage);
+    const base64 = await getBase64(images);
 
     const formData = new FormData();
     formData.append("image", base64);
@@ -111,9 +147,7 @@ export default function CreatePage() {
 
 
 
-  const [localImage, setLocalImage] = useState<File | null>(null);
-  const [localImagesPreview, setLocalImagesPreview] = useState<string | null>(null);
-
+ 
 
 
 
@@ -184,9 +218,13 @@ export default function CreatePage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!isClient) return
-    
-    const imageUrl = await uploadImages();
-    console.log(imageUrl)
+    if(!localImage){
+      setError("Please enter an logo to share")
+      return
+    }
+
+    const imageUrl = await uploadImages(localImage);
+    const fileUrl = await uploadImages(files[0]);
     // Validate form data
     if (!formData.content.trim()) {
       setError("Please enter some content to share")
@@ -236,7 +274,8 @@ export default function CreatePage() {
           requirePassword: recipient.requirePassword,
           password: recipient.password,
           linkType: formData.linkType,
-          imgUrl:imageUrl
+          imgUrl:imageUrl,
+          fileUrl:fileUrl
         })
 
         if (result.success && result.id) {
@@ -263,7 +302,8 @@ export default function CreatePage() {
             expirationTime: recipient.expirationTime,
             maxViews: recipient.maxViews,
             requirePassword: recipient.requirePassword,
-            imgUrl:imageUrl
+            imgUrl:imageUrl,
+            fileUrl:fileUrl
           })
         } else {
           setError(result.error || `Failed to create secure share for ${recipient.name}`)
@@ -495,41 +535,47 @@ export default function CreatePage() {
         
         <Card>
           <CardHeader>
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept="image/*"
+                className="hidden"
+                onChange={handleImageChange}
+              />
+
           {!localImagesPreview ? (
-                  <div className="border-2 w-32 h-32  overflow-hidden mx-auto border-dashed border-gray-300 dark:border-gray-600 rounded-full p-6 text-center cursor-pointer hover:border-gray-400 transition">
-                    <input
-                      type="file"
-                      accept="image/*"
-                      className="hidden"
-                      id="image-input"
-                      onChange={handleImageChange}
-                      required
-                    />
-                    <label
-                      htmlFor="image-input"
-                      className="cursor-pointer text-center flex flex-col items-center justify-center gap-2"
-                    >
-                      <Plus className="w-8 h-8 text-gray-400" />
-                      <p className="text-xs  text-gray-500 font-medium">Click to upload </p>
-                      {/* <p className="text-xs text-gray-500 mt-1">PNG, JPG, up to 1MB</p> */}
-                    </label>
-                  </div>
-                ) : (
-                  <div className=" relative w-32 h-32  mx-auto border-dashed border-gray-300 dark:border-gray-600 rounded-full text-center cursor-pointer hover:border-gray-400 transition">
-                    <img
-                      src={localImagesPreview}
-                      alt="Preview"
-                      className="w-full h-full rounded-full object-cover shadow-lg border-2 border-green-100"
-                    />
-                    <button
-                      type="button"
-                      onClick={removeImage}
-                      className="absolute -right-2 bottom-5 text-green-600 bg-green-50 rounded-full p-1 "
-                    >
-                      <PenLine className="w-5 h-5" />
-                    </button>
-                  </div>
-                )}
+            <div
+              onClick={() => fileInputRef.current?.click()}
+              className="border-2 w-32 h-32 overflow-hidden mx-auto border-dashed border-gray-300 dark:border-gray-600 rounded-full p-6 text-center cursor-pointer hover:border-gray-400 transition"
+            >
+              <div className="flex flex-col items-center justify-center gap-2">
+                <Plus className="w-8 h-8 text-gray-400" />
+                <p className="text-xs text-gray-500 font-medium">
+                  Click to upload
+                </p>
+              </div>
+            </div>
+            ) : (
+              <div className="relative w-32 h-32 mx-auto rounded-full cursor-pointer">
+                <img
+                  src={localImagesPreview}
+                  alt="Preview"
+                  className="w-full h-full rounded-full object-cover shadow-lg"
+                />
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    removeImage();
+                    fileInputRef.current?.click();
+                  }}
+                  className="absolute -right-2 bottom-5 text-green-600 bg-white border border-white rounded-full p-1"
+                >
+                  <PenLine className="w-5 h-5" />
+                </button>
+              </div>
+            )}
+
             <CardTitle>Create Secure Share</CardTitle>
             <CardDescription>
               Encrypt and share sensitive information with client-side AES-256 encryption
@@ -571,13 +617,61 @@ export default function CreatePage() {
                 <p className="text-xs text-gray-500 mt-1">
                   This content will be encrypted with AES-256 in your browser before transmission.
                 </p>
+
+                
+
                 {/* <InlineTip className="mt-2">
                   <span className="text-xs text-gray-600 dark:text-gray-400">
                     <strong>Pro tip:</strong> For login credentials, consider sharing the username, password, and server details in separate links for enhanced security isolation.
                   </span>
                 </InlineTip> */}
               </div>
+              
+              <button
+                    type="button"
+                     onClick={() => fileRef.current?.click()}
+                    className="w-full flex items-center justify-center gap-2
+                              bg-neutral-800 hover:bg-neutral-700
+                              text-white font-medium
+                              py-3 rounded-xl
+                              shadow-lg transition"
+                  >
+                    <Upload className="w-5 h-5" />
 
+                    Attach files
+              </button>
+              {files.length > 0 && (
+                <div className="bg-neutral-900 rounded-lg p-3 text-sm text-gray-300 space-y-2">
+                  {files.map((file, index) => (
+                    <div
+                      key={index}
+                      className="flex items-center  gap-3"
+                    >
+                      <p className="truncate flex-1 gap-2 flex items-center">
+                        📷 {file.name}
+
+                        <button
+                        type="button"
+                        onClick={() =>
+                          setFiles(prev => prev.filter((_, i) => i !== index))
+                        }
+                        className="text-gray-400 hover:text-red-500 transition"
+                      >
+                        ✕
+                      </button>
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+                <input
+                ref={fileRef}
+                type="file"
+                className="hidden"
+                 accept="image/*"
+                  onChange={handleFileChange}
+              />
               {/* Expiration and Views - Always Visible */}
               {!formData.multiRecipient && (
                 <div className="grid grid-cols-2 gap-4">
@@ -670,3 +764,5 @@ export default function CreatePage() {
     </div>
   )
 }
+
+

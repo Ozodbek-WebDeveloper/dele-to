@@ -36,6 +36,7 @@ interface ShareMetadata {
   currentViews: number
   requirePassword: boolean
   imgUrl?:string
+  fileUrl?:string
 }
 
 export default function ViewPage({ params }: { params: { id: string } }) {
@@ -300,6 +301,7 @@ export default function ViewPage({ params }: { params: { id: string } }) {
         <Card>
           <CardHeader className="text-center">
             <div className="flex justify-center mb-4">
+              fileUrl:{metadata?.fileUrl}
               {metadata?.imgUrl ? (
                 <div className="relative">
                   <img 
