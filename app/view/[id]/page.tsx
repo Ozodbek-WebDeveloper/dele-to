@@ -227,15 +227,15 @@ export default function ViewPage({ params }: { params: { id: string } }) {
                     <img 
                       src={share.imgUrl} 
                       alt="Share Image" 
-                      className="w-24 h-24 rounded-full object-cover shadow-lg border-4 border-green-100"
+                      className="w-24 h-24 rounded-full object-cover shadow-full border-4 border-green-100"
                     />
                   </div>
                 ) : (
-                  <div className="p-3 bg-green-100 rounded-full">
+                  <div className="rounded-full">
                     <img 
                       src='https://vlag.vercel.app/favicon.png' 
                       alt="Share Image" 
-                      className="w-24 h-24 rounded-full object-cover shadow-lg border-4 border-green-100"
+                      className="w-24 h-24 rounded-full object-cover shadow-full border-4 border-green-100"
                     />
                   </div>
                 )}
@@ -369,15 +369,15 @@ export default function ViewPage({ params }: { params: { id: string } }) {
                   <img 
                     src={metadata.imgUrl} 
                     alt="Share Image" 
-                    className="w-24 h-24 rounded-full object-cover shadow-lg border-4 border-blue-100"
+                    className="w-24 h-24 rounded-full object-cover shadow-full border-4 border-blue-100"
                   />
                 </div>
               ) : (
-                <div className="p-3 bg-blue-100 rounded-full">
+                <div className="rounded-full">
                   <img 
                     src='https://vlag.vercel.app/favicon.png' 
                     alt="Share Image" 
-                    className="w-24 h-24 rounded-full object-cover shadow-lg border-4 border-blue-100"
+                    className="w-24 h-24 rounded-full object-cover shadow-full border-4 border-blue-100"
                   />
                 </div>
               )}
