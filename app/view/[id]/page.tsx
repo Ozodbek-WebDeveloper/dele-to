@@ -232,7 +232,11 @@ export default function ViewPage({ params }: { params: { id: string } }) {
                   </div>
                 ) : (
                   <div className="p-3 bg-green-100 rounded-full">
-                    <Shield className="w-8 h-8 text-green-600" />
+                    <img 
+                      src='https://vlag.vercel.app/favicon.png' 
+                      alt="Share Image" 
+                      className="w-24 h-24 rounded-full object-cover shadow-lg border-4 border-green-100"
+                    />
                   </div>
                 )}
               </div>
@@ -370,7 +374,11 @@ export default function ViewPage({ params }: { params: { id: string } }) {
                 </div>
               ) : (
                 <div className="p-3 bg-blue-100 rounded-full">
-                  <Shield className="w-8 h-8 text-blue-600" />
+                  <img 
+                    src='https://vlag.vercel.app/favicon.png' 
+                    alt="Share Image" 
+                    className="w-24 h-24 rounded-full object-cover shadow-lg border-4 border-blue-100"
+                  />
                 </div>
               )}
             </div>
