@@ -20,13 +20,13 @@
         ],
         "ogTitle": "Vlag It Secure Sharing",
         "ogDescription": "Secure credential sharing with client-side AES-256 encryption",
-        "ogImageUrl": "https://dele.to/SEO.png",
-        "iconUrl": "https://dele.to/favicon.png",
-        "homeUrl": "https://dele.to/miniapp",
-        "imageUrl": "https://dele.to/SEO.png",
-        "heroImageUrl": "https://dele.to/SEO.png",
+        "ogImageUrl": "https://vlag.vercel.app/SEO.png",
+        "iconUrl": "https://vlag.vercel.app/SEO.png",
+        "homeUrl": "https://vlag.vercel.app/SEO.png",
+        "imageUrl": "https://vlag.vercel.app/SEO.png",
+        "heroImageUrl": "https://vlag.vercel.app/SEO.png",
         "buttonTitle": "🔒 Share Securely",
-        "splashImageUrl": "https://dele.to/favicon.png",
+        "splashImageUrl": "https://vlag.vercel.app/favicon.png",
         "splashBackgroundColor": "#f8fafc"
     },
     "miniApp": {
@@ -44,12 +44,12 @@
         ],
         "ogTitle": "Vlag It Secure Sharing",
         "ogDescription": "Secure credential sharing with client-side AES-256 encryption",
-        "ogImageUrl": "https://dele.to/SEO.png",
-        "icon": "https://dele.to/favicon.png",
-        "url": "https://dele.to/miniapp",
-        "heroImageUrl": "https://dele.to/SEO.png",
+        "ogImageUrl": "https://vlag.vercel.app/SEO.png",
+        "icon": "https://vlag.vercel.app/favicon.png",
+        "url": "https://vlag.vercel.app/miniapp",
+        "heroImageUrl": "https://vlag.vercel.app/SEO.png",
         "buttonTitle": "🔒 Share Securely",
-        "splashImageUrl": "https://dele.to/favicon.png",
+        "splashImageUrl": "https://vlag.vercel.app/favicon.png",
         "splashBackgroundColor": "#f8fafc"
     }
 }

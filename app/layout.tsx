@@ -37,11 +37,11 @@ export const metadata: Metadata = {
     'fc:miniapp:manifest': 'https://dele.to/.well-known/farcaster.json',
     'og:title': 'Vlag It | Secure & Confidentiality Sharing Platform',
     'og:description': 'Secure credential sharing with client-side AES-256 encryption',
-    'og:image': 'https://dele.to/SEO.png',
+    'og:image': 'https://vlag.vercel.app/SEO.png',
     'twitter:card': 'summary_large_image',
     'twitter:title': 'Vlag It | Secure & Confidentiality Sharing Platform',
     'twitter:description': 'Secure credential sharing with client-side AES-256 encryption',
-    'twitter:image': 'https://dele.to/SEO.png',
+    'twitter:image': 'https://vlag.vercel.apps/SEO.png',
   },
 }
 
