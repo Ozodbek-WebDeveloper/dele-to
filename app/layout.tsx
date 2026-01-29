@@ -8,7 +8,7 @@ import { ConsoleMessage } from '@/components/console-message'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'DELETO | Secure Credential Sharing',
+  title: 'Vlag It, Your Secure & Confidentiality Sharing Platform ',
   description: 'Secure credential sharing with client-side AES-256 encryption',
   keywords: 'secure sharing, password sharing, credential sharing, AES encryption, temporary links, secret sharing, encrypted messages, secure communication, privacy, cybersecurity',
   icons: {
@@ -16,13 +16,13 @@ export const metadata: Metadata = {
   },
 
   openGraph: {
-    title: 'DELETO | Secure Credential Sharing',
+    title: 'Vlag It | Secure & Confidentiality Sharing Platform',
     description: 'Secure credential sharing with client-side AES-256 encryption',
     images: ['/SEO.png'],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'DELETO | Secure Credential Sharing',
+    title: 'Vlag It | Secure & Confidentiality Sharing Platform',
     description: 'Secure credential sharing with client-side AES-256 encryption',
     images: ['/SEO.png'],
   },
@@ -35,11 +35,11 @@ export const metadata: Metadata = {
     'fc:miniapp:splashImageUrl': 'https://dele.to/favicon.png',
     'fc:miniapp:splashBackgroundColor': '#f8fafc',
     'fc:miniapp:manifest': 'https://dele.to/.well-known/farcaster.json',
-    'og:title': 'DELETO | Secure Credential Sharing',
+    'og:title': 'Vlag It | Secure & Confidentiality Sharing Platform',
     'og:description': 'Secure credential sharing with client-side AES-256 encryption',
     'og:image': 'https://dele.to/SEO.png',
     'twitter:card': 'summary_large_image',
-    'twitter:title': 'DELETO | Secure Credential Sharing',
+    'twitter:title': 'Vlag It | Secure & Confidentiality Sharing Platform',
     'twitter:description': 'Secure credential sharing with client-side AES-256 encryption',
     'twitter:image': 'https://dele.to/SEO.png',
   },
