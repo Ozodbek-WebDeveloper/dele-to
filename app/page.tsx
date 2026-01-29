@@ -521,9 +521,9 @@ export default function CreatePage() {
   }
 
   return (
-    <div className="min-h-screen p-4">
+    <div className="min-h-screen">
       <Header />
-      <div className="container mx-auto max-w-2xl py-8">
+      <div className="container mx-auto max-w-2xl ">
         <div className="mb-6">
           {/* <Link href="/">
             <Button variant="outline" className="border-gray-600 text-gray-300 hover:bg-gray-800">
