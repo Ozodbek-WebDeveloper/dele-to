@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   },
   other: {
     'fc:miniapp': 'vNext',
-    'fc:miniapp:name': 'DELE.TO',
+    'fc:miniapp:name': 'vlag it',
     'fc:miniapp:icon': 'https://dele.to/favicon.png',
     'fc:miniapp:url': 'https://dele.to/miniapp',
     'fc:miniapp:buttonTitle': '🔒 Share Securely',
