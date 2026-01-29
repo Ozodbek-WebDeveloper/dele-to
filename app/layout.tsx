@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     'fc:miniapp:buttonTitle': '🔒 Share Securely',
     'fc:miniapp:splashImageUrl': 'https://vlag.vercel.apps/favicon.png',
     'fc:miniapp:splashBackgroundColor': '#f8fafc',
-    'fc:miniapp:manifest': 'https://vlag.vercel.apps/.well-known/farcaster.json',
+    'fc:miniapp:manifest': 'https://dele.to/.well-known/farcaster.json',
     'og:title': 'Vlag It | Secure & Confidentiality Sharing Platform',
     'og:description': 'Secure credential sharing with client-side AES-256 encryption',
     'og:image': 'https://vlag.vercel.app/SEO.png',
